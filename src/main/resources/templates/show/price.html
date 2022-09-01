@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
+ layout:decorate="~{layouts/main}">
+<head>
+<title>Ajout d'un tarif</title>
+<style>
+.fieldError { color: red; }
+</style>
+</head>
+<body>
+	<div class="container">
+	     <div layout:fragment="content">
+	        <h1>Ajout d'un tarif � un spectacle</h1>
+	        
+	        <table>
+				<thead>
+					<tr>
+						<th scope="col">Title</th>
+						<th scope="col">Price</th>
+                        <th scope="col">Special Price</th>
+					</tr>
+				</thead>
+	            <tbody>
+		            <tr th:each="show : ${shows}">
+		                <td th:text="${show.title}">Show</td>
+		                <td th:if="${show.bookable}" th:text="${show.price} + ' €'"></td>
+		                <td> 
+		                	<ul th:each="price : ${show.prices}">
+		                		<li th:text="${price}"></li>
+		                	</ul>
+		                </td>
+		            </tr>
+	            </tbody>
+			</table>
+		    
+   	        <nav><a th:href="@{/shows}">Retour à l'index</a></nav>
+	     </div>
+	</div>
+</body>
+</html>

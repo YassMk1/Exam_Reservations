@@ -17,6 +17,11 @@ import javax.persistence.Column;
 
 import com.github.slugify.Slugify;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name="shows")
 public class Show {
@@ -42,6 +47,9 @@ public class Show {
 	
 	@ManyToMany(mappedBy = "shows")
 	private List<ArtistType> artistTypes = new ArrayList<>();
+	
+	@OneToMany(targetEntity=Price.class, mappedBy="show_id")
+	private List<Price> prices = new ArrayList<>();
 
 	/**
      * Get the performances (artists in a type of collaboration) for the show

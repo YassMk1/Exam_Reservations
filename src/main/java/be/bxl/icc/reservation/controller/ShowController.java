@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import be.bxl.icc.reservation.model.ArtistType;
+import be.bxl.icc.reservation.model.PriceService;
 import be.bxl.icc.reservation.model.Show;
 import be.bxl.icc.reservation.model.ShowService;
 import be.bxl.icc.reservation.model.Type;
@@ -23,16 +24,33 @@ import javassist.expr.Instanceof;
 public class ShowController {
 	@Autowired
 	ShowService service;
+	
+	@Autowired
+	PriceService priceService;
 
 	@GetMapping("/shows")
-    	public String index(Model model) {
+	public String index(Model model) {
 		List<Show> shows = service.getAll();
-
+	
 		model.addAttribute("shows", shows);
 		model.addAttribute("title", "Liste des spectacles");
+	
+    	return "show/index";
+	}
+	
+	
+	@GetMapping("/shows/price/{id}")
+  	 public String showPrice(Model model, @PathVariable("id") String id) {
+		Show show = service.get(id);
+
+       
+
+		model.addAttribute("show", show);
+		model.addAttribute("title", "Tarifs d'un spectacle");
 		
-        	return "show/index";
-    	}
+       	return "show/show";
+   	}
+	
 	
 	@GetMapping("/shows/{id}")
    	 public String show(Model model, @PathVariable("id") String id) {

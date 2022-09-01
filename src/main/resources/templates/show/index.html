@@ -8,19 +8,38 @@
 	<div class="container">
 	     <div layout:fragment="content">
 	        <h1 th:text="${title}">Liste des spectacles</h1>
-	
-	        <ul th:unless="${#lists.isEmpty(shows)}">
-            	<li th:each="show : ${shows}">
-		    <span th:text="${show.title}">Ayiti</span>
-	    	    <span th:if="${show.bookable}" th:text="${show.price} + ' €'">9.99 €</span>
-	    	    <span th:if="${#lists.size(show.representations)==1}">- 1 représentation</span>
-		    <span th:if="${#lists.size(show.representations)>1}" 
-			th:text="|- ${#lists.size(show.representations)} représentations|">- 2 représentations</span>
-		     <em th:if="${#lists.size(show.representations)==0}">aucune représentation</em>
-
-	    	    <a th:href="@{/shows/{id}(id=${show.id})}">View</a>
-		</li>
-	        </ul>
+	        
+	        
+	        <table>
+				<thead>
+					<tr>
+						<th scope="col">Title</th>
+						<th scope="col">Price</th>
+                        <th scope="col">Representation</th>
+                        <th colspan="1"></th>
+					</tr>
+				</thead>
+	            <tbody>
+		            <tr th:each="show : ${shows}">
+		                <td th:text="${show.title}">Show</td>
+		                <td th:if="${show.bookable}" th:text="${show.price} + ' €'"></td>
+		                <td> 
+		                	<ul th:each="price : ${show.prices}">
+		                		<li th:text="${price}"></li>
+		                	</ul>
+		                </td>
+		                <td>
+		                	<span th:if="${#lists.size(show.representations)==1}">- 1 représentation</span>
+		    				<span th:if="${#lists.size(show.representations)>1}" 
+								th:text="|- ${#lists.size(show.representations)} représentations|">- 2 représentations</span>
+		     				<em th:if="${#lists.size(show.representations)==0}">aucune représentation</em>
+		                </td>
+		                <td><a th:href="@{/shows/{id}(id=${show.id})}">View</a></td>
+		                <td><a th:href="@{/shows/{id}(id=${show.id})}">Edit</a></td>
+		            </tr>
+	            </tbody>
+			</table>
+	        
 	    </div>
 	</div>
 </body>

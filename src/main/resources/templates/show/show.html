@@ -16,7 +16,10 @@
         
 	        <p th:if="${show.location}"><strong>Lieu de création:</strong> <span th:text="${show.location.designation}">Art Center</span></p>
 	
-	        <p><strong>Prix:</strong> <span th:text="${show.price} + ' €'">9.99 €</span></p>
+	        <p><strong>Prix normal:</strong> <span th:text="${show.price} + ' €'">9.99 €</span></p>
+	        <ul th:each="price : ${show.prices}">
+		         <li th:text="${price}"></li>
+		    </ul>
         
 	        <p th:if="${show.bookable}"><em>Réservable</em></p>
 	        <p th:unless="${show.bookable}"><em>Non réservable</em></p>
