@@ -48,7 +48,7 @@ public class ShowController {
 		model.addAttribute("show", show);
 		model.addAttribute("title", "Tarifs d'un spectacle");
 		
-       	return "show/show";
+       	return "show/price";
    	}
 	
 	

@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
 	     <div layout:fragment="content">
-	        <h1>Ajout d'un tarif à un spectacle</h1>
+	        <h1>Les tarifs d'un spectacle</h1>
 	        
 	        <table>
 				<thead>
@@ -21,7 +21,7 @@
 					</tr>
 				</thead>
 	            <tbody>
-		            <tr th:each="show : ${shows}">
+		            <tr>
 		                <td th:text="${show.title}">Show</td>
 		                <td th:if="${show.bookable}" th:text="${show.price} + ' â‚¬'"></td>
 		                <td> 
